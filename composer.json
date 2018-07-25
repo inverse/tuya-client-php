@@ -12,7 +12,9 @@
   "require": {
     "php": "^7.1",
     "guzzlehttp/guzzle": "^6.3",
-    "webmozart/assert": "^1.3",
+    "webmozart/assert": "^1.3"
+  },
+  "require-dev": {
     "phpunit/phpunit": "^7.2"
   },
   "autoload": {
@@ -22,7 +24,12 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Inverse\\TuyaClient\\": "tests/"
+      "Tests\\Functional\\Inverse\\TuyaClient\\": "tests/Functional",
+      "Tests\\Unit\\Inverse\\TuyaClient\\": "tests/unit"
     }
+  },
+  "scripts": {
+    "test": "phpunit --testsuite unit",
+    "cs": "php-cs-fixer fix"
   }
 }

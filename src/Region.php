@@ -24,7 +24,26 @@ class Region
         $this->value = $value;
     }
 
-    public function getValue(): string
+    public static function fromAccessToken(Token $token): self
+    {
+        $prefix = substr($token->getAccessToken(), 0, 2);
+        $value = '';
+        switch ($prefix) {
+            case 'AY':
+                $value = self::CN;
+                break;
+            case 'EU':
+                $value = self::EU;
+                break;
+            case 'US':
+                $value = self::US;
+                break;
+        }
+
+        return new self($value);
+    }
+
+    public function __toString()
     {
         return $this->value;
     }

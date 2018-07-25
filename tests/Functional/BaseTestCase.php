@@ -1,13 +1,19 @@
 <?php
 
-namespace Tests\Inverse\TuyaClient;
+namespace Tests\Functional\Inverse\TuyaClient;
 
+use Inverse\TuyaClient\ApiClient;
 use Inverse\TuyaClient\Session;
 use PHPUnit\Framework\TestCase;
 
-class ApiClientTest extends TestCase
+class BaseTestCase extends TestCase
 {
-    private function getSessionFromEnv(): Session
+    protected function getApiClient(): ApiClient
+    {
+        return new ApiClient($this->getSessionFromEnv());
+    }
+
+    protected function getSessionFromEnv(): Session
     {
         $username = getenv('TUYA_USERNAME');
         $password = getenv('TUYA_PASSWORD');
