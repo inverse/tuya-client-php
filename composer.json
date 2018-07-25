@@ -1,0 +1,28 @@
+{
+  "name": "inverse/tuya-client",
+  "description": "API client for Tuya",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Malachi Soord",
+      "email": "inverse.chi@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "guzzlehttp/guzzle": "^6.3",
+    "webmozart/assert": "^1.3",
+    "phpunit/phpunit": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Inverse\\TuyaClient\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Inverse\\TuyaClient\\": "tests/"
+    }
+  }
+}
