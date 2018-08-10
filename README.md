@@ -41,7 +41,9 @@ $devices = $apiClient->discoverDevices();
 // Switch on all switches
 foreach ($devices as $device) {
     if ($device instanceOf SwitchDevice) {
-        $apiClient->sendEvent($device->getOnEvent());
+        if (!$device->isOn()) {
+            $apiClient->sendEvent($device->getOnEvent());
+        }
     }
 }
 ```
