@@ -29,12 +29,17 @@ class ApiClient
      */
     private $deviceFactory;
 
+    /**
+     * @var TokenManager
+     */
+    private $tokenManager;
 
     public function __construct(Session $session, Client $client = null)
     {
         $this->session = $session;
         $this->client = $client ?? new Client();
         $this->deviceFactory = new DeviceFactory();
+        $this->tokenManager = new TokenManager();
     }
 
     public function discoverDevices(): array
@@ -56,15 +61,22 @@ class ApiClient
         $this->request($event->getAction(), $namespace, $payload);
     }
 
-    private function request(string $name, string $namespace, array $payload = []): array
+    private function checkAccessToken()
     {
-        if (!$this->session->hasAccessToken()) {
-            $this->session->setToken($this->getAccessToken());
+        if (!$this->tokenManager->hasToken()) {
+            $token = $this->getAccessToken();
+            $this->tokenManager->setToken($token);
+            $this->session->setRegion(Region::fromAccessToken($token));
         }
 
-        if (!$this->isAccessTokenValid()) {
-            $this->session->setToken($this->refreshAccessToken());
+        if (!$this->tokenManager->isValidToken()) {
+            $this->tokenManager->setToken($this->refreshAccessToken());
         }
+    }
+
+    private function request(string $name, string $namespace, array $payload = []): array
+    {
+        $this->checkAccessToken();
 
         $uri = UriResolver::resolve($this->getBaseUrl($this->session), new Uri('homeassistant/skill'));
 
@@ -74,7 +86,7 @@ class ApiClient
             'payloadVersion' => 1,
         ];
 
-        $payload['accessToken'] = $this->session->getToken()->getAccessToken();
+        $payload['accessToken'] = $this->tokenManager->getToken()->getAccessToken();
 
         $data = [
             'header' => $header,
@@ -129,7 +141,7 @@ class ApiClient
             [
                 'query' => [
                     'grant_type' => 'refresh_token',
-                    'refresh_token' => $this->session->getToken()->getRefreshToken(),
+                    'refresh_token' => $this->tokenManager->getToken()->getRefreshToken(),
                 ],
             ]
         );
@@ -143,12 +155,6 @@ class ApiClient
         return $token;
     }
 
-    private function isAccessTokenValid(): bool
-    {
-        $token = $this->session->getToken();
-
-        return time() + $token->getExpireTime() > time();
-    }
 
     private function getBaseUrl(Session $session): UriInterface
     {

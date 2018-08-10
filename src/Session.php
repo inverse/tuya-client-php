@@ -24,11 +24,6 @@ class Session
      */
     private $region;
 
-    /**
-     * @var Token
-     */
-    private $token;
-
     public function __construct(string $username, string $password, int $countryCode, ?Region $region = null)
     {
         $this->username = $username;
@@ -57,19 +52,8 @@ class Session
         return $this->region;
     }
 
-    public function hasAccessToken(): bool
+    public function setRegion(Region $region): void
     {
-        return $this->token instanceof Token;
-    }
-
-    public function getToken(): Token
-    {
-        return $this->token;
-    }
-
-    public function setToken(Token $token): void
-    {
-        $this->token = $token;
-        $this->region = Region::fromAccessToken($token);
+        $this->region = $region;
     }
 }
