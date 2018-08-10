@@ -11,6 +11,7 @@
   ],
   "require": {
     "php": "^7.1",
+    "ext-json": "*",
     "guzzlehttp/guzzle": "^6.3",
     "webmozart/assert": "^1.3"
   },

@@ -9,7 +9,7 @@ trait Stateful
      */
     protected $state;
 
-    public function isState(): bool
+    public function isOn(): bool
     {
         return $this->state;
     }

@@ -49,12 +49,14 @@ class ApiClient
         return $devices;
     }
 
-    public function sendEvent(DeviceEvent $event, $namespace = 'control')
+    public function sendEvent(DeviceEvent $event, string $namespace = 'control'): void
     {
-        $this->request($event->getAction(), $namespace, $event->getDeviceId(), $event->getPayload());
+        $payload = $event->getPayload();
+        $payload['devId'] = $event->getDeviceId();
+        $this->request($event->getAction(), $namespace, $payload);
     }
 
-    private function request(string $name, string $namespace, string $deviceId = null, array $payload = []): array
+    private function request(string $name, string $namespace, array $payload = []): array
     {
         if (!$this->session->hasAccessToken()) {
             $this->session->setToken($this->getAccessToken());
@@ -74,18 +76,17 @@ class ApiClient
 
         $payload['accessToken'] = $this->session->getToken()->getAccessToken();
 
-        if ($deviceId) {
-            $payload['devId'] = $deviceId;
-        }
-
         $data = [
             'header' => $header,
             'payload' => $payload,
         ];
 
-        $response = $this->client->post($uri, [
-            'json' => $data,
-        ]);
+        $response = $this->client->post(
+            $uri,
+            [
+                'json' => $data,
+            ]
+        );
 
         $response = json_decode((string)$response->getBody(), true);
 
@@ -98,14 +99,17 @@ class ApiClient
     {
         $uri = UriResolver::resolve($this->getBaseUrl($this->session), new Uri('homeassistant/auth.do'));
 
-        $response = $this->client->request('POST', $uri, [
-            'form_params' => [
-                'userName' => $this->session->getUsername(),
-                'password' => $this->session->getPassword(),
-                'countryCode' => $this->session->getCountryCode(),
-                'from' => 'tuya'
+        $response = $this->client->post(
+            $uri,
+            [
+                'form_params' => [
+                    'userName' => $this->session->getUsername(),
+                    'password' => $this->session->getPassword(),
+                    'countryCode' => $this->session->getCountryCode(),
+                    'from' => 'tuya',
+                ],
             ]
-        ]);
+        );
 
         $response = json_decode((string)$response->getBody(), true);
 
@@ -120,12 +124,15 @@ class ApiClient
     {
         $uri = UriResolver::resolve($this->getBaseUrl($this->session), new Uri('homeassistant/access.do'));
 
-        $response = $this->client->request('GET', $uri, [
-            'query' => [
-                'grant_type' => 'refresh_token',
-                'refresh_token' => $this->session->getToken()->getRefreshToken(),
+        $response = $this->client->get(
+            $uri,
+            [
+                'query' => [
+                    'grant_type' => 'refresh_token',
+                    'refresh_token' => $this->session->getToken()->getRefreshToken(),
+                ],
             ]
-        ]);
+        );
 
         $response = json_decode((string)$response->getBody(), true);
 
@@ -148,6 +155,12 @@ class ApiClient
         return new Uri(sprintf(self::BASE_URL_FORMAT, $session->getRegion()));
     }
 
+    /**
+     * @param array $response
+     * @param string|null $message
+     *
+     * @throws TuyaClientException
+     */
     private function validate(array $response, string $message = null)
     {
         if (isset($response['responseStatus']) && $response['responseStatus'] === 'error') {
