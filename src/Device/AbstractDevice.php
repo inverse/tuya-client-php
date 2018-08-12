@@ -20,7 +20,7 @@ class AbstractDevice
     protected $id;
 
     /**
-     * @var string
+     * @var DevType
      */
     protected $devType;
 
@@ -34,7 +34,7 @@ class AbstractDevice
      */
     protected $isOnline;
 
-    public function __construct(string $name, string $icon, string $id, string $devType, string $haType)
+    public function __construct(string $name, string $icon, string $id, DevType $devType, string $haType)
     {
         $this->name = $name;
         $this->icon = $icon;

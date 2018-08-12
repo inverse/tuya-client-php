@@ -8,12 +8,12 @@ class DeviceFactory
     {
         $device = null;
         switch ($data['dev_type']) {
-            case 'switch':
+            case DevType::SWITCH:
                 $device = new SwitchDevice(
                     $data['name'],
                     $data['icon'],
                     $data['id'],
-                    $data['dev_type'],
+                    new DevType($data['dev_type']),
                     $data['ha_type']
                 );
 
