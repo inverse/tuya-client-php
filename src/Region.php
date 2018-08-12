@@ -47,4 +47,9 @@ class Region
     {
         return $this->value;
     }
+
+    public static function createDefault(): self
+    {
+        return new self(self::US);
+    }
 }

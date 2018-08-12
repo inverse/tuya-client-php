@@ -29,7 +29,7 @@ class Session
         $this->username = $username;
         $this->password = $password;
         $this->countryCode = $countryCode;
-        $this->region = $region ?? new Region(Region::US);
+        $this->region = $region ?? Region::createDefault();
     }
 
     public function getUsername(): string
