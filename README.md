@@ -2,8 +2,8 @@
 
 [![Author](https://img.shields.io/badge/author-@inverse-blue.svg?style=flat-square)](https://github.com/inverse)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Packagist Version](https://img.shields.io/packagist/v/inverse/tuya-client.svg?style=flat-square)](https://packagist.org/packages/league/flysystem)
-[![Total Downloads](https://img.shields.io/packagist/dt/inverse/tuya-client.svg?style=flat-square)](https://packagist.org/packages/league/flysystem)
+[![Packagist Version](https://img.shields.io/packagist/v/inverse/tuya-client.svg?style=flat-square)](https://packagist.org/packages/inverse/tuya-client)
+[![Total Downloads](https://img.shields.io/packagist/dt/inverse/tuya-client.svg?style=flat-square)](https://packagist.org/packages/inverse/tuya-client)
 
 An WIP API Client for controlling [Tuya][1] products, heavily inspired by [tuyapy][0].
 
