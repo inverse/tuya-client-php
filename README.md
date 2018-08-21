@@ -30,9 +30,10 @@ use Inverse\TuyaClient\Device\SwitchDevice;
 $username = getenv('TUYA_USERNAME');
 $password = getenv('TUYA_PASSWORD');
 $countryCode = getenv('TUYA_COUNTRYCODE');
+$bizType = new BizType(BizType::TUYA);
 
 // Make client
-$session = new Session($username, $password, $countryCode);
+$session = new Session($username, $password, $countryCode, $bizType);
 $apiClient = new ApiClient($session);
 
 // Get all devices
