@@ -118,6 +118,7 @@ class ApiClient
                     'userName' => $this->session->getUsername(),
                     'password' => $this->session->getPassword(),
                     'countryCode' => $this->session->getCountryCode(),
+                    'bizType' => $this->session->getBizType(),
                     'from' => 'tuya',
                 ],
             ]

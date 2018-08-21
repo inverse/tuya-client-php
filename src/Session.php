@@ -20,15 +20,26 @@ class Session
     private $countryCode;
 
     /**
+     * @var BizType
+     */
+    private $bizType;
+
+    /**
      * @var Region
      */
     private $region;
 
-    public function __construct(string $username, string $password, int $countryCode, ?Region $region = null)
-    {
+    public function __construct(
+        string $username,
+        string $password,
+        int $countryCode,
+        ?BizType $bizType = null,
+        ?Region $region = null
+    ) {
         $this->username = $username;
         $this->password = $password;
         $this->countryCode = $countryCode;
+        $this->bizType = $bizType ?? BizType::createDefault();
         $this->region = $region ?? Region::createDefault();
     }
 
@@ -50,6 +61,11 @@ class Session
     public function getRegion(): Region
     {
         return $this->region;
+    }
+
+    public function getBizType(): BizType
+    {
+        return $this->bizType;
     }
 
     public function setRegion(Region $region): void
