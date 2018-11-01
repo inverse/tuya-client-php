@@ -19,6 +19,7 @@ class BaseTestCase extends TestCase
         $username = getenv('TUYA_USERNAME');
         $password = getenv('TUYA_PASSWORD');
         $countryCode = getenv('TUYA_COUNTRYCODE');
+
         return new Session($username, $password, $countryCode, new BizType(BizType::SMART_LIFE));
     }
 }

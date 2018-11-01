@@ -22,10 +22,10 @@ class RegionTest extends TestCase
     {
         return [
             'EU' => [
-                new Token('EU123456', '', 0)
+                new Token('EU123456', '', 0),
             ],
             'China' => [
-                new Token('AY123456', '', 0)
+                new Token('AY123456', '', 0),
             ],
         ];
     }
@@ -44,10 +44,10 @@ class RegionTest extends TestCase
     {
         return [
             'Empty' => [
-                new Token('', '', 0)
+                new Token('', '', 0),
             ],
             'Unmapped' => [
-                new Token('DJHFHD3847', '', 0)
+                new Token('DJHFHD3847', '', 0),
             ],
         ];
     }
