@@ -1,5 +1,6 @@
 # API Client for Tuya
 
+[![StyleCI](https://github.styleci.io/repos/142345069/shield)](https://github.styleci.io/repos/142345069)
 [![Build Status](https://travis-ci.org/inverse/tuya-client-php.svg?branch=master)](https://travis-ci.org/inverse/tuya-client-php)
 [![Author](https://img.shields.io/badge/author-@inverse-blue.svg?style=flat-square)](https://github.com/inverse)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
