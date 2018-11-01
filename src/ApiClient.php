@@ -81,15 +81,15 @@ class ApiClient
         $uri = UriResolver::resolve($this->getBaseUrl($this->session), new Uri('homeassistant/skill'));
 
         $header = [
-            'name' => $name,
-            'namespace' => $namespace,
+            'name'           => $name,
+            'namespace'      => $namespace,
             'payloadVersion' => 1,
         ];
 
         $payload['accessToken'] = $this->tokenManager->getToken()->getAccessToken();
 
         $data = [
-            'header' => $header,
+            'header'  => $header,
             'payload' => $payload,
         ];
 
@@ -100,7 +100,7 @@ class ApiClient
             ]
         );
 
-        $response = json_decode((string)$response->getBody(), true);
+        $response = json_decode((string) $response->getBody(), true);
 
         $this->validate($response, sprintf('Failed to get response from %s', $name));
 
@@ -115,16 +115,16 @@ class ApiClient
             $uri,
             [
                 'form_params' => [
-                    'userName' => $this->session->getUsername(),
-                    'password' => $this->session->getPassword(),
+                    'userName'    => $this->session->getUsername(),
+                    'password'    => $this->session->getPassword(),
                     'countryCode' => $this->session->getCountryCode(),
-                    'bizType' => $this->session->getBizType(),
-                    'from' => 'tuya',
+                    'bizType'     => $this->session->getBizType(),
+                    'from'        => 'tuya',
                 ],
             ]
         );
 
-        $response = json_decode((string)$response->getBody(), true);
+        $response = json_decode((string) $response->getBody(), true);
 
         $this->validate($response, 'An error occurred while fetching access token');
 
@@ -141,13 +141,13 @@ class ApiClient
             $uri,
             [
                 'query' => [
-                    'grant_type' => 'refresh_token',
+                    'grant_type'    => 'refresh_token',
                     'refresh_token' => $this->tokenManager->getToken()->getRefreshToken(),
                 ],
             ]
         );
 
-        $response = json_decode((string)$response->getBody(), true);
+        $response = json_decode((string) $response->getBody(), true);
 
         $this->validate($response, 'Failed to refresh access token');
 
@@ -156,14 +156,13 @@ class ApiClient
         return $token;
     }
 
-
     private function getBaseUrl(Session $session): UriInterface
     {
         return new Uri(sprintf(self::BASE_URL_FORMAT, $session->getRegion()));
     }
 
     /**
-     * @param array $response
+     * @param array       $response
      * @param string|null $message
      *
      * @throws TuyaClientException
@@ -172,6 +171,7 @@ class ApiClient
     {
         if (isset($response['responseStatus']) && $response['responseStatus'] === 'error') {
             $message = $message ?? $response['responseMsg'];
+
             throw new TuyaClientException($message);
         }
     }

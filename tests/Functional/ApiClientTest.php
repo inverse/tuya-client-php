@@ -29,6 +29,7 @@ class ApiClientTest extends BaseTestCase
     private function getDevice(ApiClient $apiClient): SwitchDevice
     {
         $devices = $apiClient->discoverDevices();
+
         return $devices[1];
     }
 }
