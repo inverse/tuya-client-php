@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class RegionTest extends TestCase
 {
     /**
-     * @param Token $token
+     * @param Token  $token
      * @param Region $expected
      * @dataProvider fromAccessTokenProvider
      */
