@@ -40,6 +40,8 @@ class Region
                 break;
         }
 
+        Assert::notEmpty($value, sprintf('Unsupported prefix (%s)', $prefix));
+
         return new self($value);
     }
 
