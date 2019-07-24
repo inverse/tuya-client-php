@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Inverse\TuyaClient;
 
-use InvalidArgumentException;
 use Inverse\TuyaClient\Region;
 use Inverse\TuyaClient\Token;
 use PHPUnit\Framework\TestCase;
@@ -11,12 +10,12 @@ class RegionTest extends TestCase
 {
     /**
      * @param Token $token
+     * @param Region $expected
      * @dataProvider fromAccessTokenProvider
      */
-    public function testFromAccessToken(Token $token): void
+    public function testFromAccessToken(Token $token, Region $expected): void
     {
-        $this->doesNotPerformAssertions();
-        Region::fromAccessToken($token);
+        $this->assertEquals($expected, Region::fromAccessToken($token));
     }
 
     public function fromAccessTokenProvider(): array
@@ -24,31 +23,19 @@ class RegionTest extends TestCase
         return [
             'EU' => [
                 new Token('EU123456', '', 0),
+                Region::createEU(),
             ],
             'China' => [
                 new Token('AY123456', '', 0),
+                Region::createCN(),
             ],
-        ];
-    }
-
-    /**
-     * @param Token $token
-     * @dataProvider fromAccessTokenProviderInvalid
-     */
-    public function testFromAccessTokenInvalid(Token $token): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        Region::fromAccessToken($token);
-    }
-
-    public function fromAccessTokenProviderInvalid(): array
-    {
-        return [
             'Empty' => [
                 new Token('', '', 0),
+                Region::createUS(),
             ],
             'Unmapped' => [
                 new Token('DJHFHD3847', '', 0),
+                Region::createUS(),
             ],
         ];
     }
