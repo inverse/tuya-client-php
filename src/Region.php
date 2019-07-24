@@ -6,11 +6,11 @@ use Webmozart\Assert\Assert;
 
 class Region
 {
-    const CN = 'cn';
-    const EU = 'eu';
-    const US = 'us';
+    private const CN = 'cn';
+    private const EU = 'eu';
+    private const US = 'us';
 
-    const VALID_REGIONS = [
+    private const VALID_REGIONS = [
         self::CN,
         self::EU,
         self::US,
@@ -51,5 +51,20 @@ class Region
     public static function createDefault(): self
     {
         return new self(self::US);
+    }
+
+    public static function createUS(): self
+    {
+        return new self(self::US);
+    }
+
+    public static function createCN(): self
+    {
+        return new self(self::CN);
+    }
+
+    public static function createEU(): self
+    {
+        return new self(self::EU);
     }
 }
