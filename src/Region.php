@@ -27,7 +27,6 @@ class Region
     public static function fromAccessToken(Token $token): self
     {
         $prefix = substr($token->getAccessToken(), 0, 2);
-        $value = '';
         switch ($prefix) {
             case 'AY':
                 $value = self::CN;
@@ -36,11 +35,10 @@ class Region
                 $value = self::EU;
                 break;
             case 'US':
+            default:
                 $value = self::US;
                 break;
         }
-
-        Assert::notEmpty($value, sprintf('Unsupported prefix (%s)', $prefix));
 
         return new self($value);
     }
