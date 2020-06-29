@@ -3,6 +3,7 @@
 namespace Tests\Functional\Inverse\TuyaClient;
 
 use Inverse\TuyaClient\ApiClient;
+use Inverse\TuyaClient\Device\AbstractDevice;
 use Inverse\TuyaClient\Device\SwitchDevice;
 
 class ApiClientTest extends BaseTestCase
@@ -11,25 +12,37 @@ class ApiClientTest extends BaseTestCase
     {
         $apiClient = $this->getApiClient();
 
-        $switch = $this->getDevice($apiClient);
+        $device = $this->getDevice($apiClient);
 
-        if (!$switch->isOn()) {
-            $apiClient->sendEvent($switch->getOnEvent());
-
-            $switch = $this->getDevice($apiClient);
-            $this->assertTrue($switch->isOn());
+        if ($device === null) {
+            return $this->doesNotPerformAssertions();
         }
 
-        $apiClient->sendEvent($switch->getOffEvent());
-        $switch = $this->getDevice($apiClient);
+        if ($device instanceof SwitchDevice) {
+            if (!$device->isOn()) {
+                $apiClient->sendEvent($device->getOnEvent());
 
-        $this->assertFalse($switch->isOn());
+                $device = $this->getDevice($apiClient);
+                $this->assertTrue($device->isOn());
+            }
+
+            $apiClient->sendEvent($device->getOffEvent());
+            $device = $this->getDevice($apiClient);
+
+            $this->assertFalse($device->isOn());
+        }
     }
 
-    private function getDevice(ApiClient $apiClient): SwitchDevice
+    private function getDevice(ApiClient $apiClient): ?AbstractDevice
     {
         $devices = $apiClient->discoverDevices();
 
-        return $devices[1];
+        $device = null;
+
+        if (!empty($devices)) {
+            $device = $devices[0];
+        }
+
+        return $device;
     }
 }

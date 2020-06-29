@@ -128,9 +128,7 @@ class ApiClient
 
         $this->validate($response, 'An error occurred while fetching access token');
 
-        $token = Token::fromArray($response);
-
-        return $token;
+        return Token::fromArray($response);
     }
 
     private function refreshAccessToken(): Token
@@ -151,9 +149,7 @@ class ApiClient
 
         $this->validate($response, 'Failed to refresh access token');
 
-        $token = Token::fromArray($response);
-
-        return $token;
+        return Token::fromArray($response);
     }
 
     private function getBaseUrl(Session $session): UriInterface
@@ -162,15 +158,15 @@ class ApiClient
     }
 
     /**
-     * @param array       $response
-     * @param string|null $message
+     * @param array  $response
+     * @param string $message
      *
      * @throws TuyaClientException
      */
-    private function validate(array $response, string $message = null)
+    private function validate(array $response, string $message)
     {
         if (isset($response['responseStatus']) && $response['responseStatus'] === 'error') {
-            $message = $message ?? $response['responseMsg'];
+            $message = sprintf('%s - %s', $message, $response['errorMsg']);
 
             throw new TuyaClientException($message);
         }
