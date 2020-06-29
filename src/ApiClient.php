@@ -158,7 +158,7 @@ class ApiClient
     }
 
     /**
-     * @param array       $response
+     * @param array  $response
      * @param string $message
      *
      * @throws TuyaClientException
