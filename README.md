@@ -22,11 +22,14 @@ composer require inverse/tuya-client
 ## Example
 
 ```php
-require __DIR__ . '../vendor/autoload.php';
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
 
 use Inverse\TuyaClient\Session;
 use Inverse\TuyaClient\ApiClient;
 use Inverse\TuyaClient\Device\SwitchDevice;
+use Inverse\TuyaCliuent\Biztype;
 
 // Setup credentials
 $username = getenv('TUYA_USERNAME');
