@@ -29,7 +29,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Inverse\TuyaClient\Session;
 use Inverse\TuyaClient\ApiClient;
 use Inverse\TuyaClient\Device\SwitchDevice;
-use Inverse\TuyaCliuent\Biztype;
+use Inverse\TuyaClient\BizType;
 
 // Setup credentials
 $username = getenv('TUYA_USERNAME');
