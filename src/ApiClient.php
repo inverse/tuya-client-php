@@ -48,7 +48,10 @@ class ApiClient
 
         $devices = [];
         foreach ($response['payload']['devices'] as $device) {
-            $devices[] = $this->deviceFactory->fromArray($device);
+            $deviceData = $this->deviceFactory->fromArray($device);
+            if ($deviceData) {
+                $devices[] = $deviceData;
+            }
         }
 
         return $devices;

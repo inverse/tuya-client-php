@@ -4,7 +4,7 @@ namespace Inverse\TuyaClient\Device;
 
 class DeviceFactory
 {
-    public function fromArray(array $data): AbstractDevice
+    public function fromArray(array $data): ?AbstractDevice
     {
         $device = null;
         switch ($data['dev_type']) {
