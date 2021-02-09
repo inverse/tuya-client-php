@@ -1,7 +1,8 @@
 # API Client for Tuya
 
 [![StyleCI](https://github.styleci.io/repos/142345069/shield)](https://github.styleci.io/repos/142345069)
-[![Build Status](https://travis-ci.org/inverse/tuya-client-php.svg?branch=master)](https://travis-ci.org/inverse/tuya-client-php)
+![CI](https://github.com/inverse/tuya-client-php/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/inverse/tuya-client-php/branch/master/graph/badge.svg?token=QRAPALSCXJ)](https://codecov.io/gh/inverse/tuya-client-php)
 [![Author](https://img.shields.io/badge/author-@inverse-blue.svg?style=flat-square)](https://github.com/inverse)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Packagist Version](https://img.shields.io/packagist/v/inverse/tuya-client.svg?style=flat-square)](https://packagist.org/packages/inverse/tuya-client)
