@@ -4,3 +4,4 @@
 /phpunit.xml
 /.php_cs.cache
 /.phpunit.result.cache
+/coverage.xml

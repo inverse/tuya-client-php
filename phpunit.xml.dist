@@ -14,6 +14,11 @@
         <env name="TUYA_PASSWORD" value="" />
         <env name="TUYA_COUNTRYCODE" value="" />
     </php>
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
     <testsuites>
         <testsuite name="unit">
             <directory>tests/Unit</directory>
