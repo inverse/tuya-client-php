@@ -16,6 +16,7 @@ class ApiClientTest extends BaseTestCase
 
         if ($device === null) {
             self::assertNull(null);
+
             return;
         }
 

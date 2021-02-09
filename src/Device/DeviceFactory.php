@@ -19,6 +19,7 @@ class DeviceFactory
 
                 $device->setIsOnline($data['data']['online']);
                 $device->setState($data['data']['state']);
+
                 break;
         }
 
