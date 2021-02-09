@@ -8,7 +8,6 @@ use Inverse\TuyaClient\Device\SwitchDevice;
 
 class ApiClientTest extends BaseTestCase
 {
-
     public function testDiscoverDevices(): void
     {
         $apiClient = $this->getApiClient();
