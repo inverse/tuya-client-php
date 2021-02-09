@@ -30,13 +30,16 @@ class Region
         switch ($prefix) {
             case 'AY':
                 $value = self::CN;
+
                 break;
             case 'EU':
                 $value = self::EU;
+
                 break;
             case 'US':
             default:
                 $value = self::US;
+
                 break;
         }
 
