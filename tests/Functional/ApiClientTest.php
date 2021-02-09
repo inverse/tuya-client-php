@@ -8,14 +8,16 @@ use Inverse\TuyaClient\Device\SwitchDevice;
 
 class ApiClientTest extends BaseTestCase
 {
-    public function testDiscoverDevices()
+
+    public function testDiscoverDevices(): void
     {
         $apiClient = $this->getApiClient();
 
         $device = $this->getDevice($apiClient);
 
         if ($device === null) {
-            return $this->doesNotPerformAssertions();
+            self::assertNull(null);
+            return;
         }
 
         if ($device instanceof SwitchDevice) {
@@ -23,19 +25,23 @@ class ApiClientTest extends BaseTestCase
                 $apiClient->sendEvent($device->getOnEvent());
 
                 $device = $this->getDevice($apiClient);
-                $this->assertTrue($device->isOn());
+                self::assertTrue($device->isOn());
             }
 
             $apiClient->sendEvent($device->getOffEvent());
             $device = $this->getDevice($apiClient);
 
-            $this->assertFalse($device->isOn());
+            self::assertFalse($device->isOn());
         }
     }
 
     private function getDevice(ApiClient $apiClient): ?AbstractDevice
     {
         $devices = $apiClient->discoverDevices();
+
+        if (count($devices) === 0) {
+            $this->addWarning('No devices returned');
+        }
 
         $device = null;
 
