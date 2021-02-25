@@ -1,6 +1,5 @@
 # API Client for Tuya
 
-[![StyleCI](https://github.styleci.io/repos/142345069/shield)](https://github.styleci.io/repos/142345069)
 ![CI](https://github.com/inverse/tuya-client-php/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/inverse/tuya-client-php/branch/master/graph/badge.svg?token=QRAPALSCXJ)](https://codecov.io/gh/inverse/tuya-client-php)
 [![Author](https://img.shields.io/badge/author-@inverse-blue.svg?style=flat-square)](https://github.com/inverse)
