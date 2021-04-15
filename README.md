@@ -9,6 +9,8 @@
 
 An WIP API Client for controlling [Tuya][1] products, heavily inspired by [tuyapy][0].
 
+I no longer use Tuya so am looking for someone who could help bring this project forward, get in touch if you want to help out.
+
 ## Currently Supporting
 
 - Switch devices
