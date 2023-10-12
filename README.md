@@ -9,7 +9,7 @@
 
 An WIP API Client for controlling [Tuya][1] products, heavily inspired by [tuyapy][0].
 
-I no longer use Tuya so am looking for someone who could help bring this project forward, get in touch if you want to help out.
+From my understanding the API that this library uses is no longer supported and as such you'll have better luck leveraging a package such as: https://github.com/ground-creative/tuyapiphp
 
 ## Currently Supporting
 
